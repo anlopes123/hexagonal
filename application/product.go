@@ -48,7 +48,7 @@ type Product struct {
 	ID 		string  `valid:"uuidv4"`
 	Name 	string  `valid:"required"`
 	Status 	string	`valid:"required"`
-	Price 	float64 `valid:"float64, optional"`
+	Price 	float64 `valid:"float, optional"`
 }
 
 func NewProduct() *Product {
