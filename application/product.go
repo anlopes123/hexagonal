@@ -22,7 +22,7 @@ type ProductInterface interface {
 
 type ProductServiceInterface interface {
 	Get(id string) (ProductInterface, error)
-	Create(name string, price float) (ProductInterface, error)
+	Create(name string, price float64) (ProductInterface, error)
 	Enable(product ProductInterface) (ProductInterface, error)
 	Disable(product ProductInterface) (ProductInterface, error)
 }
@@ -48,7 +48,7 @@ type Product struct {
 	ID 		string  `valid:"uuidv4"`
 	Name 	string  `valid:"required"`
 	Status 	string	`valid:"required"`
-	Price 	float64 `valid:"float, optional"`
+	Price 	float64 `valid:"float64, optional"`
 }
 
 func NewProduct() *Product {
