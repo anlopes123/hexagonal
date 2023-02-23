@@ -3,6 +3,7 @@ package db_test
 import  (
 	"testing"
 	"database/sql"
+	"github.com/anlopes123/hexagonal/adapter/db"
 	"github.com/stretchr/testify/require"	
 	"log"
 )
@@ -41,7 +42,7 @@ func createProduct(db *sql.DB) {
 func TestProductDb_Get(t *testing.T) {
 	setUp()
 	defer Db.Close()
-	productDb := NewProductDb(Db)
+	productDb := db.NewProductDb(Db)
 	product, err := productDb.Get("abc")
 	require.Nil(t, err)
 	require.Equal(t, "Product test", product.GetName())
