@@ -3,10 +3,10 @@ package db_test
 import  (
 	"testing"
 	"database/sql"
-	/*"github.com/mattn/go-sqlite3"*/
 	_ "github.com/mattn/go-sqlite3"
 	"github.com/anlopes123/hexagonal/adapter/db"
-	"github.com/stretchr/testify/require"	
+	"github.com/stretchr/testify/require"
+	"github.com/anlopes123/hexagonal/application"	 
 	"log"
 )
 
@@ -53,7 +53,29 @@ func TestProductDb_Get(t *testing.T) {
 	require.Equal(t, "Product test", product.GetName())
 	require.Equal(t, 0.0, product.GetPrice())
 	require.Equal(t, "disabled", product.GetStatus())
-
-
-
 }
+
+func TestProductDb_Save(t *testing.T) {
+	setUp()
+	defer Db.Close()
+	productDb := db.NewProductDb(Db)
+
+	product:= application.NewProduct()
+	product.Name = "Product Test"
+	product.Price = 25
+
+	productResult, err := productDb.Save(product)
+	require.Nil(t, err)
+	require.Equal(t, product.Name, productResult.GetName())
+	require.Equal(t, product.Price, productResult.GetPrice())
+	require.Equal(t, product.Status, productResult.GetStatus())
+	
+	product.Name = "Product Update"
+	product.Status = "Enabled"
+	productResult, err = productDb.Save(product)
+	require.Nil(t, err)
+	require.Equal(t, product.Name, productResult.GetName())
+	require.Equal(t, product.Price, productResult.GetPrice())
+	require.Equal(t, product.Status, productResult.GetStatus())	
+
+} 

@@ -48,7 +48,7 @@ func TestProduct_IsValid(t *testing.T) {
 
 	product.Status = "INVALID"
 	_, err = product.IsValid()
-	require.Equal(t, "The status must be enagled or disabled", err.Error())
+	require.Equal(t, "The status must be enabled or disabled", err.Error())
 
 	product.Status = application.ENABLED 
 	_, err = product.IsValid()

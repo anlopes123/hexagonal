@@ -1,8 +1,7 @@
 package db
 
 import (
-	"database/sql"
-	/*"github.com/mattn/go-sqlite3"*/
+	"database/sql"	
 	"github.com/anlopes123/hexagonal/application"	 
 )
 
@@ -27,17 +26,25 @@ func (p *ProductDb) Get(id string) (application.ProductInterface, error) {
 	return &product, nil
 }
 
-func(p *ProductDb) Save(product ProductInterface)(ProductInterface, error) {
+func(p *ProductDb) Save(product application.ProductInterface) (application.ProductInterface, error) {
 	var rows int
 	p.db.QueryRow("Select id from products where id=?", product.GetID()).Scan(&rows)
 	if rows == 0 {
-		return p.create(product)
+		product, err := p.create(product)
+		if err != nil {
+			return nil, err
+		}
+		return product, nil
 	} else {
-		return p.update(product)
+		product, err := p.update(product)
+		if err != nil {
+			return nil, err
+		}
+		return product, nil
 	}
 }
 
-func(p *Productdb) create(product ProductInterface)(ProductInterface, error) {
+func(p *ProductDb) create(product application.ProductInterface) (application.ProductInterface, error) {
 	stmt, err := p.db.Prepare(`INSERT INTO products(id, name, price, status) values(?, ?, ?, ?)`)
 	if err != nil {
 		return nil, err;
@@ -58,7 +65,7 @@ func(p *Productdb) create(product ProductInterface)(ProductInterface, error) {
 	return product, nil
 }
 
-func(p *ProductDb) update(product ProductInterface)(ProductInterface, error) {
+func(p *ProductDb) update(product application.ProductInterface) (application.ProductInterface, error) {
 	_, err := p.db.Exec(`update products set name=?, price=?, status=? where id=?`, 
 		product.GetName(), product.GetPrice(), product.GetStatus(), product.GetID())
 	
