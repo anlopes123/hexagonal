@@ -16,7 +16,7 @@ func TestProductService_Get(t *testing.T) {
 	persistense.EXPECT().Get(gomock.Any()).Return(product, nil).AnyTimes()
 
 	service:= application.ProductService {
-		Persistense: persistense,
+		Persistence: persistense,
 	}
 
 	result, err:= service.Get("abc")
@@ -34,7 +34,7 @@ func TestProductService_Create(t *testing.T) {
 	persistense.EXPECT().Save(gomock.Any()).Return(product, nil).AnyTimes()
 
 	service:= application.ProductService {
-		Persistense: persistense,
+		Persistence: persistense,
 	}
 	result, err:= service.Create("Product 1", 10)
 	require.Nil(t, err)
@@ -52,7 +52,7 @@ func TestProductService_Enable(t *testing.T) {
 	persistense.EXPECT().Save(gomock.Any()).Return(product, nil).AnyTimes()
 
 	service:= application.ProductService {
-		Persistense: persistense,
+		Persistence: persistense,
 	}
 
 	result, err := service.Enable(product)
@@ -70,7 +70,7 @@ func TestProductService_Disable(t *testing.T) {
 	persistense.EXPECT().Save(gomock.Any()).Return(product, nil).AnyTimes()
 
 	service:= application.ProductService {
-		Persistense: persistense,
+		Persistence: persistense,
 	}
 
 	result, err := service.Disable(product)
