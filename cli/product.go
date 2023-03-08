@@ -2,10 +2,10 @@ package cli
 
 import (
 	"fmt"
-	"github.com/anlopes123/hexagonal/application"
+	"github.com/anlopes123/hexagonal/application"	
 )
 
-func Run(service application.ProductServiceInterface, action string, productId string, productName string, price float)(string, error) {
+func Run(service application.ProductServiceInterface, action string, productId string, productName string, price float64)(string, error) {
 	var result = ""
 	switch action {
 	case "create":
