@@ -9,8 +9,7 @@ import (
 	"database/sql"
 	dbInfra "github.com/anlopes123/hexagonal/adapter/db"
 	"github.com/anlopes123/hexagonal/application"
-	"github.com/spf13/cobra"
-	"github.com/spf13/viper"
+	"github.com/spf13/cobra"	
 )
 
 var db, _ = sql.Open("sqlite3", "db.sqlite")

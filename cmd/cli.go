@@ -5,8 +5,7 @@ Copyright © 2023 NAME HERE <EMAIL ADDRESS>
 package cmd
 
 import (
-	"fmt"
-	"github.com/anlopes123/adapters/cli"
+	"github.com/anlopes123/hexagonal/adapter/cli"
 	"github.com/spf13/cobra"
 )
 
