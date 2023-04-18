@@ -1,20 +1,24 @@
 /*
 Copyright © 2023 NAME HERE <EMAIL ADDRESS>
-
 */
 package cmd
 
 import (
-	"os"
 	"database/sql"
+	"os"
+
 	dbInfra "github.com/anlopes123/hexagonal/adapter/db"
 	"github.com/anlopes123/hexagonal/application"
-	"github.com/spf13/cobra"	
+	"github.com/spf13/cobra"
 )
 
-var db, _ = sql.Open("sqlite3", "db.sqlite")
-var productDb = dbInfra.NewProductDb(db);
-var productService = application.ProductService{Persistence: productDb}
+func NewProductService() *application.ProductService {
+	db, _ := sql.Open("sqlite3", "db.sqlite")
+
+	productDb := dbInfra.NewProductDb(db)
+	productService := application.NewProductService(productDb)
+	return productService
+}
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
@@ -51,5 +55,3 @@ func init() {
 	// when this action is called directly.
 	rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }
-
-
