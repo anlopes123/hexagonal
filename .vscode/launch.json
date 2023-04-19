@@ -3,5 +3,25 @@
     // Focalizar para exibir as descrições dos atributos existentes.
     // Para obter mais informações, acesse: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
-    "configurations": []
+    "configurations": [
+        {
+            "name":"Test: Env And Args",
+            "type":"go",
+            "request":"launch",
+            "mode":"debug",
+            "program":"${workspaceFolder}/main.go",
+            "envFile":"",
+            "env":{
+                
+            },
+            "args":[
+                "cli",
+                "-a=create",
+                "-n='Product cli'",
+                "-p=32.0"
+            ],
+            "showLog":true
+        }
+   
+    ]
 }

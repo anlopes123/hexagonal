@@ -9,6 +9,7 @@ import (
 
 	dbInfra "github.com/anlopes123/hexagonal/adapter/db"
 	"github.com/anlopes123/hexagonal/application"
+	_ "github.com/mattn/go-sqlite3"
 	"github.com/spf13/cobra"
 )
 
