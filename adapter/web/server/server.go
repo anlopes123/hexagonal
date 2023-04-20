@@ -6,6 +6,7 @@ import (
 	"os"
 	"time"
 
+	"github.com/anlopes123/hexagonal/adapter/web/server/handler"
 	"github.com/anlopes123/hexagonal/application"
 	"github.com/codegangsta/negroni"
 	"github.com/gorilla/mux"
@@ -21,15 +22,18 @@ func MakeNewWebServer() *WebServer {
 
 func (w WebServer) Serve() {
 
-	r:= mux.NewRouter()
-	n:= negroni.New(
-		negroni.NewLogger()
+	r := mux.NewRouter()
+	n := negroni.New(
+		negroni.NewLogger(),
 	)
+
+	handler.MakeNewProductHandlers(r, n, w.Service)
+	http.Handle("/", r)
 
 	server := &http.Server{
 		ReadHeaderTimeout: 10 * time.Second,
 		WriteTimeout:      10 * time.Second,
-		Addr:              ":8080",
+		Addr:              ":9000",
 		Handler:           http.DefaultServeMux,
 		ErrorLog:          log.New(os.Stderr, "log: ", log.Lshortfile),
 	}

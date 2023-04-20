@@ -4,6 +4,7 @@
     // Para obter mais informações, acesse: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
+
         {
             "name":"Test: Env And Args",
             "type":"go",
@@ -15,10 +16,7 @@
                 
             },
             "args":[
-                "cli",
-                "-a=create",
-                "-n='Product cli'",
-                "-p=32.0"
+              "http"
             ],
             "showLog":true
         }
